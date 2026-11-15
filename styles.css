@@ -1,0 +1,1430 @@
+
+/* ==========================================
+   AURELION — LUXURY MECHANICAL WATCH
+   HTML5 + CSS3 | No JavaScript
+========================================== */
+
+:root {
+  --page-bg: #090d13;
+  --panel-bg: #111923;
+  --panel-border: rgba(255,255,255,.09);
+
+  --gold-light: #ffe7a5;
+  --gold: #c89b50;
+  --gold-dark: #765023;
+
+  --silver-light: #e6edf2;
+  --silver: #8999a7;
+  --silver-dark: #394653;
+
+  --copper: #b86d42;
+  --dial: #121b25;
+
+  --text: #edf2f5;
+  --muted: #81909e;
+
+  --font-main: "Manrope", sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-mono: "DM Mono", monospace;
+
+  --watch-size: 440px;
+  --dial-size: 386px;
+  --marker-radius: 163px;
+
+  --hand-hour-time: 43200s;
+  --hand-minute-time: 3600s;
+  --hand-second-time: 60s;
+}
+
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse at 50% 15%,
+      rgba(44, 62, 78, .32),
+      transparent 48%
+    ),
+    linear-gradient(145deg, #0d131b, #070a0f 65%);
+  color: var(--text);
+  font-family: var(--font-main);
+}
+
+.page {
+  width: min(1180px, calc(100% - 48px));
+  margin: auto;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.topbar {
+  min-height: 83px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 4px;
+  font-size: 14px;
+}
+
+.brand-symbol {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 21px;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.status-dot,
+.motion-indicator {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #77c99b;
+  box-shadow: 0 0 10px rgba(119,201,155,.6);
+}
+
+/* ==========================================
+   INTRODUCTION
+========================================== */
+
+.intro {
+  max-width: 690px;
+  margin: 0 auto;
+  padding: 67px 0 46px;
+  text-align: center;
+}
+
+.eyebrow,
+.panel-kicker {
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+.intro h1 {
+  margin: 15px 0;
+  font-family: var(--font-display);
+  font-size: clamp(43px, 6vw, 68px);
+  font-weight: 500;
+  letter-spacing: -2px;
+  line-height: 1.12;
+}
+
+.intro h1 span {
+  color: var(--gold-light);
+}
+
+.intro p {
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* ==========================================
+   SHOWCASE LAYOUT
+========================================== */
+
+.showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  align-items: center;
+  gap: 42px;
+  padding: 28px 32px;
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.035), transparent 60%),
+    rgba(15, 22, 31, .76);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.3),
+    inset 0 1px rgba(255,255,255,.04);
+}
+
+.watch-stage {
+  min-width: 0;
+  min-height: 535px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(72, 83, 91, .23),
+      transparent 66%
+    ),
+    linear-gradient(135deg, #151e28, #0b1118);
+}
+
+.watch-stage::before {
+  content: "";
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  border: 1px solid rgba(213, 181, 119, .06);
+  box-shadow:
+    0 0 0 30px rgba(213,181,119,.015),
+    0 0 0 60px rgba(213,181,119,.012);
+}
+
+/* ==========================================
+   WATCH CASE
+========================================== */
+
+.watch {
+  position: relative;
+  width: var(--watch-size);
+  height: var(--watch-size);
+  max-width: 100%;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 25px 25px rgba(0,0,0,.5));
+}
+
+.case-outer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 10deg,
+    #34414b,
+    #e0e4e6,
+    #586572,
+    #f4e1b6,
+    #59646d,
+    #252f39,
+    #c4cdd2,
+    #3a4751,
+    #34414b
+  );
+  box-shadow:
+    inset 0 0 0 2px #e4e8e8,
+    inset 0 0 0 5px #596570,
+    inset 0 0 0 8px #202a33,
+    inset 0 0 24px rgba(0,0,0,.8),
+    0 0 0 2px #1c252e,
+    0 18px 40px rgba(0,0,0,.45);
+}
+
+.case-bezel {
+  position: absolute;
+  inset: 13px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(
+    #3d4650,
+    #e5c982,
+    #6a5637,
+    #c7d0d5,
+    #424e5b,
+    #f1d89e,
+    #444e57,
+    #3d4650
+  );
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.5),
+    inset 0 0 0 5px #424c56,
+    0 0 0 1px #080c10;
+}
+
+.bezel-inner {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  padding: 6px;
+  background: linear-gradient(145deg, #f3e1ad, #6e542c 45%, #c9a45d);
+  box-shadow:
+    inset 0 2px 5px rgba(255,255,255,.4),
+    inset 0 -3px 5px rgba(0,0,0,.7);
+}
+
+/* ==========================================
+   DIAL
+========================================== */
+
+.dial {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      circle at 50% 44%,
+      #25313d 0%,
+      #151f29 48%,
+      #0b1119 100%
+    );
+  border: 2px solid #303b46;
+  box-shadow:
+    inset 0 0 0 2px rgba(226,192,123,.26),
+    inset 0 0 24px rgba(0,0,0,.9);
+}
+
+/* Brushed metal texture */
+
+.dial-texture {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: 50%;
+  opacity: .18;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255,255,255,.2) 0deg .35deg,
+      transparent .35deg 1.2deg
+    );
+  mask-image: radial-gradient(
+    circle,
+    transparent 0%,
+    #000 75%
+  );
+}
+
+/* Fine inner ring */
+
+.dial::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 12px;
+  border: 1px solid rgba(221,190,127,.28);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.015),
+    inset 0 0 12px rgba(0,0,0,.4);
+  pointer-events: none;
+}
+
+.dial-glass {
+  position: absolute;
+  z-index: 13;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      130deg,
+      rgba(255,255,255,.12),
+      transparent 26%,
+      transparent 70%,
+      rgba(255,255,255,.025)
+    );
+  pointer-events: none;
+}
+
+/* ==========================================
+   HOUR MARKERS
+========================================== */
+
+.markers {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+}
+
+.hour-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 10px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    #8a6b37,
+    #ffdf9a,
+    #9d773e
+  );
+  transform:
+    rotate(calc(var(--i) * 30deg))
+    translateY(calc(var(--marker-radius) * -1));
+  transform-origin: center center;
+  box-shadow: 0 0 5px rgba(231,193,119,.3);
+}
+
+.hour-marker.major {
+  width: 6px;
+  height: 17px;
+  background: linear-gradient(
+    90deg,
+    #a67a37,
+    #fff0c4,
+    #c09248
+  );
+}
+
+/* ==========================================
+   MINUTE TRACK — 60 POSITIONS
+========================================== */
+
+.minute-track {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+}
+
+.minute-track span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 4px;
+  border-radius: 1px;
+  background: rgba(227,204,158,.65);
+  transform:
+    rotate(calc(var(--i) * 6deg))
+    translateY(-174px);
+  transform-origin: center center;
+}
+
+/* ==========================================
+   ROMAN NUMERALS
+========================================== */
+
+.numerals {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  color: #e4c98f;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,.8);
+}
+
+.numeral {
+  position: absolute;
+  width: 30px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+}
+
+.n12 { top: 37px; left: calc(50% - 15px); }
+.n1 { top: 56px; right: 86px; }
+.n2 { top: 100px; right: 45px; }
+.n3 { top: calc(50% - 12px); right: 25px; }
+.n4 { bottom: 100px; right: 45px; }
+.n5 { bottom: 56px; right: 86px; }
+.n6 { bottom: 28px; left: calc(50% - 15px); }
+.n7 { bottom: 56px; left: 86px; }
+.n8 { bottom: 100px; left: 45px; }
+.n9 { top: calc(50% - 12px); left: 25px; }
+.n10 { top: 100px; left: 45px; }
+.n11 { top: 56px; left: 86px; }
+
+/* ==========================================
+   DIAL BRANDING
+========================================== */
+
+.dial-brand {
+  position: absolute;
+  z-index: 7;
+  top: 78px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.dial-brand-name {
+  color: #f1d7a0;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.dial-brand-line {
+  width: 45px;
+  height: 1px;
+  margin: 5px 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dial-subtitle {
+  color: #a9a99b;
+  font-family: var(--font-mono);
+  font-size: 5px;
+  letter-spacing: 1px;
+}
+
+/* ==========================================
+   MECHANICAL GEAR ASSEMBLY
+========================================== */
+
+.mechanism {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 55px;
+  width: 205px;
+  height: 145px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(212,176,106,.16);
+  border-radius: 45% 45% 50% 50%;
+  background:
+    radial-gradient(ellipse, rgba(200,155,80,.09), transparent 70%);
+}
+
+.gear {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      #d5b06b 0deg 9deg,
+      #71532d 9deg 12deg,
+      #332a22 12deg 22.5deg
+    );
+  border: 2px solid #b58c4e;
+  box-shadow:
+    inset 0 0 0 3px #453721,
+    inset 0 0 9px rgba(0,0,0,.85),
+    0 0 0 2px #151a1e,
+    0 3px 8px rgba(0,0,0,.65);
+  animation: gear-clockwise 18s linear infinite;
+}
+
+.gear::before {
+  content: "";
+  position: absolute;
+  inset: 15%;
+  border-radius: 50%;
+  border: 3px solid #d4af6d;
+  background:
+    repeating-conic-gradient(
+      #795b34 0deg 10deg,
+      #d8b879 10deg 15deg,
+      #3a3023 15deg 30deg
+    );
+  box-shadow:
+    inset 0 0 0 2px #302719,
+    0 0 0 2px #211b14;
+}
+
+.gear-inner {
+  position: relative;
+  z-index: 2;
+  width: 43%;
+  height: 43%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 3px solid #b58c4e;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #f4d999,
+    #9a713b 48%,
+    #332719 100%
+  );
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.4),
+    inset 0 -3px 5px rgba(0,0,0,.8);
+}
+
+.gear-hub {
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #fff0c1,
+    #9a723c 65%,
+    #34281a
+  );
+  border: 1px solid #f0d49a;
+}
+
+.gear-large {
+  width: 92px;
+  height: 92px;
+  top: 9px;
+  left: 10px;
+}
+
+.gear-small {
+  width: 67px;
+  height: 67px;
+  top: 20px;
+  right: 8px;
+  animation-duration: 12s;
+  animation-direction: reverse;
+  background:
+    repeating-conic-gradient(
+      #b4c0c8 0deg 9deg,
+      #53616a 9deg 12deg,
+      #252e36 12deg 22.5deg
+    );
+  border-color: #aebcc5;
+}
+
+.gear-small::before {
+  border-color: #b5c1c8;
+}
+
+.gear-copper {
+  width: 55px;
+  height: 55px;
+  left: 72px;
+  bottom: 4px;
+  animation-duration: 9s;
+  background:
+    repeating-conic-gradient(
+      #e6a16f 0deg 9deg,
+      #82482e 9deg 12deg,
+      #37231b 12deg 22.5deg
+    );
+  border-color: #ca8555;
+}
+
+.gear-copper::before {
+  border-color: #cf8d5a;
+}
+
+.gear-mini {
+  width: 39px;
+  height: 39px;
+  right: 19px;
+  bottom: 3px;
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+
+.gear-mini .gear-inner {
+  width: 45%;
+  height: 45%;
+}
+
+@keyframes gear-clockwise {
+  to { transform: rotate(360deg); }
+}
+
+.mechanism-line {
+  position: absolute;
+  width: 1px;
+  height: 18px;
+  left: 50%;
+  top: -18px;
+  background: linear-gradient(transparent, #c7a15f);
+}
+
+/* ==========================================
+   SUBDIAL
+========================================== */
+
+.subdial {
+  position: absolute;
+  z-index: 7;
+  bottom: 49px;
+  left: 50%;
+  width: 49px;
+  height: 49px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 2px solid #a9864d;
+  background: radial-gradient(circle, #25313a, #10171e);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.05),
+    0 0 6px rgba(0,0,0,.7);
+}
+
+.subdial-ring {
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed rgba(229,199,144,.65);
+  border-radius: 50%;
+}
+
+.subdial-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: #e7c78a;
+}
+
+.subdial-label {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #b8a27a;
+  font-family: var(--font-mono);
+  font-size: 5px;
+}
+
+/* ==========================================
+   CLOCK HANDS
+========================================== */
+
+.hands {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 100%;
+  transform: translate(-50%, -100%) rotate(0deg);
+  border-radius: 100% 100% 3px 3px;
+}
+
+/* Hour hand */
+
+.hour-hand {
+  z-index: 3;
+  width: 9px;
+  height: 104px;
+  background: linear-gradient(
+    90deg,
+    #806033,
+    #f5dfa8 35%,
+    #bd9653 70%,
+    #674c29
+  );
+  border: 1px solid #f1d69c;
+  box-shadow:
+    0 0 5px rgba(240,207,142,.25),
+    1px 2px 4px rgba(0,0,0,.6);
+  animation: hour-rotation var(--hand-hour-time) linear infinite;
+}
+
+.hour-hand::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 2px;
+  height: 65px;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,.5);
+}
+
+@keyframes hour-rotation {
+  from {
+    transform: translate(-50%, -100%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -100%) rotate(360deg);
+  }
+}
+
+/* Minute hand */
+
+.minute-hand {
+  z-index: 4;
+  width: 6px;
+  height: 143px;
+  background: linear-gradient(
+    90deg,
+    #8595a0,
+    #ffffff 40%,
+    #8c9ca6
+  );
+  border: 1px solid #d7e2e7;
+  box-shadow: 0 1px 5px rgba(0,0,0,.65);
+  animation: minute-rotation var(--hand-minute-time) linear infinite;
+}
+
+.minute-hand::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 1px;
+  height: 112px;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,.65);
+}
+
+@keyframes minute-rotation {
+  from {
+    transform: translate(-50%, -100%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -100%) rotate(360deg);
+  }
+}
+
+/* Second hand */
+
+.second-hand {
+  z-index: 5;
+  width: 2px;
+  height: 165px;
+  border-radius: 3px;
+  background: linear-gradient(
+    180deg,
+    #e9b35e 0%,
+    #e9b35e 75%,
+    #c77949 100%
+  );
+  animation: second-rotation var(--hand-second-time) steps(60, end) infinite;
+}
+
+.second-hand::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #e9b35e;
+}
+
+.counterweight {
+  position: absolute;
+  left: 50%;
+  bottom: -23px;
+  width: 9px;
+  height: 24px;
+  transform: translateX(-50%);
+  border: 1px solid #d69a50;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #854a2b, #e5a25d, #854a2b);
+}
+
+@keyframes second-rotation {
+  from {
+    transform: translate(-50%, -100%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -100%) rotate(360deg);
+  }
+}
+
+/* Center pivot */
+
+.center-pin {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  width: 19px;
+  height: 19px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid #f3dca9;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #fff0c5,
+    #c2954f 48%,
+    #674523
+  );
+  box-shadow:
+    0 2px 5px rgba(0,0,0,.75),
+    inset 0 1px 2px rgba(255,255,255,.6);
+}
+
+.center-pin span {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: #604622;
+}
+
+/* ==========================================
+   GLASS REFLECTION
+========================================== */
+
+.glass-reflection {
+  position: absolute;
+  z-index: 12;
+  top: -10%;
+  left: -20%;
+  width: 75%;
+  height: 70%;
+  transform: rotate(-32deg);
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.12),
+    rgba(255,255,255,.015) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ==========================================
+   CASE SCREWS
+========================================== */
+
+.case-screw {
+  position: absolute;
+  z-index: 4;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #8d9aa1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f3f5f5, #697783 70%);
+  box-shadow: 0 1px 4px rgba(0,0,0,.7);
+}
+
+.case-screw::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  right: 2px;
+  height: 1px;
+  transform: rotate(-35deg);
+  background: #38434b;
+}
+
+.screw-one { top: 24px; left: 50%; transform: translateX(-50%); }
+.screw-two { right: 24px; top: 50%; transform: translateY(-50%); }
+.screw-three { bottom: 24px; left: 50%; transform: translateX(-50%); }
+.screw-four { left: 24px; top: 50%; transform: translateY(-50%); }
+
+/* ==========================================
+   CROWN AND LUGS
+========================================== */
+
+.crown {
+  position: absolute;
+  z-index: -1;
+  right: -24px;
+  top: 50%;
+  width: 32px;
+  height: 58px;
+  transform: translateY(-50%);
+  border-radius: 6px 12px 12px 6px;
+  border: 2px solid #8e9ba2;
+  background: repeating-linear-gradient(
+    90deg,
+    #34424d 0 4px,
+    #b9c3c8 4px 6px,
+    #53616a 6px 9px
+  );
+  box-shadow: 3px 3px 8px rgba(0,0,0,.6);
+}
+
+.crown span {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  right: 5px;
+  height: 3px;
+  transform: translateY(-50%);
+  background: #d7b66f;
+}
+
+.lug {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  width: 95px;
+  height: 55px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #45525e, #d5dce0, #53616a);
+  border: 2px solid #78858d;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.55);
+}
+
+.lug-top {
+  top: -25px;
+  border-radius: 12px 12px 4px 4px;
+}
+
+.lug-bottom {
+  bottom: -25px;
+  border-radius: 4px 4px 12px 12px;
+}
+
+/* ==========================================
+   SPECIFICATION PANEL
+========================================== */
+
+.spec-panel {
+  padding: 14px 0;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-index {
+  color: #6f7e89;
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.spec-panel h2 {
+  margin: 24px 0 13px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.panel-description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.spec-divider {
+  height: 1px;
+  margin: 26px 0;
+  background: linear-gradient(90deg, var(--gold-dark), transparent);
+  opacity: .6;
+}
+
+.spec-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.spec-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(206,166,97,.25);
+  border-radius: 11px;
+  color: var(--gold-light);
+  background: rgba(206,166,97,.07);
+  font-size: 18px;
+}
+
+.spec-row div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.spec-label {
+  color: #8594a0;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+}
+
+.spec-row strong {
+  color: #e2e7e9;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.motion-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #9db6a7;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+/* ==========================================
+   ENGINEERING DETAIL CARDS
+========================================== */
+
+.engineering {
+  padding: 88px 0 75px;
+}
+
+.section-heading {
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: clamp(27px, 4vw, 37px);
+  font-weight: 500;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.detail-card {
+  position: relative;
+  min-height: 185px;
+  padding: 22px;
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #151e28, #0e151d);
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    background .3s ease;
+}
+
+.detail-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(202,160,91,.4);
+  background: linear-gradient(145deg, #1c2935, #101821);
+}
+
+.detail-number {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: #63717e;
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.detail-symbol {
+  color: var(--gold);
+  font-size: 24px;
+  margin-bottom: 23px;
+}
+
+.detail-card h3 {
+  margin-bottom: 9px;
+  font-size: 13px;
+}
+
+.detail-card p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid var(--panel-border);
+  color: #71808d;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1050px) {
+  .showcase {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .watch-stage {
+    min-height: 510px;
+  }
+
+  .spec-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+  }
+
+  .panel-heading,
+  .spec-panel h2,
+  .panel-description,
+  .spec-divider,
+  .motion-status {
+    grid-column: 1 / -1;
+  }
+
+  .spec-row {
+    margin: 12px 0;
+  }
+
+  .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+  :root {
+    --watch-size: min(86vw, 360px);
+    --marker-radius: calc(var(--watch-size) * .37);
+  }
+
+  .page {
+    width: calc(100% - 24px);
+  }
+
+  .topbar {
+    min-height: 68px;
+  }
+
+  .brand {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .brand-symbol {
+    width: 31px;
+    height: 31px;
+  }
+
+  .header-meta {
+    font-size: 7px;
+    letter-spacing: .7px;
+  }
+
+  .intro {
+    padding: 48px 0 32px;
+  }
+
+  .intro h1 {
+    font-size: 43px;
+  }
+
+  .intro p {
+    font-size: 11px;
+    padding: 0 10px;
+  }
+
+  .showcase {
+    padding: 12px;
+    gap: 20px;
+    border-radius: 17px;
+  }
+
+  .watch-stage {
+    min-height: 410px;
+  }
+
+  .stage-label {
+    display: none;
+  }
+
+  .spec-panel {
+    display: block;
+    padding: 15px 5px;
+  }
+
+  .spec-panel h2 {
+    font-size: 30px;
+  }
+
+  .spec-row {
+    margin: 16px 0;
+  }
+
+  .engineering {
+    padding: 55px 0;
+  }
+
+  .detail-grid {
+    gap: 10px;
+  }
+
+  .detail-card {
+    min-height: 165px;
+    padding: 15px;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+    font-size: 7px;
+  }
+
+  /* Proportional watch internals */
+  .numerals {
+    font-size: 13px;
+  }
+
+  .n12 { top: 9%; }
+  .n1 { top: 14%; right: 22%; }
+  .n2 { top: 26%; right: 11%; }
+  .n3 { right: 6%; }
+  .n4 { bottom: 26%; right: 11%; }
+  .n5 { bottom: 14%; right: 22%; }
+  .n6 { bottom: 7%; }
+  .n7 { bottom: 14%; left: 22%; }
+  .n8 { bottom: 26%; left: 11%; }
+  .n9 { left: 6%; }
+  .n10 { top: 26%; left: 11%; }
+  .n11 { top: 14%; left: 22%; }
+
+  .dial-brand {
+    top: 19%;
+  }
+
+  .dial-brand-name {
+    font-size: 9px;
+  }
+
+  .dial-subtitle {
+    font-size: 4px;
+  }
+
+  .minute-track span {
+    transform:
+      rotate(calc(var(--i) * 6deg))
+      translateY(calc(var(--watch-size) * -.395));
+  }
+
+  .hour-hand {
+    height: calc(var(--watch-size) * .235);
+  }
+
+  .minute-hand {
+    height: calc(var(--watch-size) * .325);
+  }
+
+  .second-hand {
+    height: calc(var(--watch-size) * .375);
+  }
+
+  .mechanism {
+    width: 48%;
+    height: 37%;
+    bottom: 13%;
+  }
+
+  .gear-large {
+    width: 43%;
+    height: 63%;
+    top: 6%;
+    left: 4%;
+  }
+
+  .gear-small {
+    width: 34%;
+    height: 48%;
+    top: 13%;
+    right: 3%;
+  }
+
+  .gear-copper {
+    width: 28%;
+    height: 39%;
+    left: 35%;
+    bottom: 2%;
+  }
+
+  .gear-mini {
+    width: 20%;
+    height: 28%;
+    right: 8%;
+    bottom: 2%;
+  }
+
+  .subdial {
+    width: 38px;
+    height: 38px;
+    bottom: 11%;
+  }
+}
+
+/* ==========================================
+   EXTRA SMALL DEVICES
+========================================== */
+
+@media (max-width: 370px) {
+  .header-meta {
+    font-size: 6px;
+  }
+
+  .watch-stage {
+    min-height: 350px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-card {
+    min-height: 140px;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
